@@ -1,0 +1,10 @@
+git:
+  nerdFontsVersion: "3"
+  border: rounded
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+    parseEmoji: true
+gui:
+  showIcons: true
+  language: 'en'

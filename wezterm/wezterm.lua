@@ -5,50 +5,49 @@ local config = wezterm.config_builder()
 config.color_scheme = "Gruvbox dark, medium (base16)"
 config.font = wezterm.font_with_fallback({
 	{
-		family = "Iosevka Nerd Font",
+		family = "JetBrainsMonoNL Nerd Font",
 		harfbuzz_features = {
 			"liga", -- (default) ligatures
 			"clig", -- (default) contextual ligatures
 		},
 	},
-	"Segoe UI Emoji",
+	"Iosevka NF",
 })
 
 config.colors = {
 	tab_bar = {
-		background = '#3c3836',
-		inactive_tab_edge = '#3c3836',
+		background = "#3c3836",
+		inactive_tab_edge = "#3c3836",
 
 		active_tab = {
-			bg_color = '#282828',
-			fg_color = '#97971a',
-			intensity = 'Bold',
+			bg_color = "#282828",
+			fg_color = "#97971a",
+			intensity = "Bold",
 		},
 
 		inactive_tab = {
-			bg_color = '#3c3836',
-			fg_color = '#665c54'
+			bg_color = "#3c3836",
+			fg_color = "#665c54",
 		},
 
 		inactive_tab_hover = {
-			bg_color = '#282828',
-			fg_color = '#665c54',
-			italic=true,
+			bg_color = "#282828",
+			fg_color = "#665c54",
+			italic = true,
 		},
 
 		new_tab = {
-			bg_color = '#3c3836',
-			fg_color = '#665c54',
+			bg_color = "#3c3836",
+			fg_color = "#665c54",
 		},
 
 		new_tab_hover = {
-			bg_color = '#282828',
-			fg_color = '#665c54',
+			bg_color = "#282828",
+			fg_color = "#665c54",
 			italic = true,
 		},
 	},
 }
-
 
 -- Window
 config.enable_tab_bar = true
@@ -74,7 +73,7 @@ config.keys = {
 	{
 		key = "r",
 		mods = "CTRL|SHIFT",
-		action = act.PromptInputLine {
+		action = act.PromptInputLine({
 			description = "Enter new name for tab",
 			action = wezterm.action_callback(function(window, pane, line)
 				-- line will be `nil` if they hit escape without entering anything
@@ -84,31 +83,31 @@ config.keys = {
 					window:active_tab():set_title(line)
 				end
 			end),
-		}
+		}),
 	},
 
 	-- Panes
-	{ key = "n",          mods = "CTRL",       action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-	{ key = "p",          mods = "CTRL",       action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-	{ key = "w",          mods = "CTRL",       action = act.CloseCurrentPane({ confirm = true }) },
+	{ key = "n", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	{ key = "p", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+	{ key = "w", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
 
-	{ key = "LeftArrow",  mods = "ALT",        action = act.ActivatePaneDirection("Left") },
-	{ key = "RightArrow", mods = "ALT",        action = act.ActivatePaneDirection("Right") },
-	{ key = "UpArrow",    mods = "ALT",        action = act.ActivatePaneDirection("Up") },
-	{ key = "DownArrow",  mods = "ALT",        action = act.ActivatePaneDirection("Down") },
+	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "ALT", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "ALT", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "ALT", action = act.ActivatePaneDirection("Down") },
 
-	{ key = "LeftArrow",  mods = "ALT|CTRL",   action = act.AdjustPaneSize({ "Left", 5 }) },
-	{ key = "DownArrow",  mods = "ALT|CTRL",   action = act.AdjustPaneSize({ "Down", 5 }) },
-	{ key = "UpArrow",    mods = "ALT|CTRL",   action = act.AdjustPaneSize({ "Up", 5 }) },
-	{ key = "RightArrow", mods = "ALT|CTRL",   action = act.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "LeftArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "DownArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
+	{ key = "UpArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "RightArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
 
 	-- Fonts
-	{ key = "-",          mods = "CTRL",       action = act.DecreaseFontSize },
-	{ key = "+",          mods = "CTRL",       action = act.IncreaseFontSize },
+	{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
+	{ key = "+", mods = "CTRL", action = act.IncreaseFontSize },
 
 	-- Search
-	{ key = "H",          mods = "SHIFT|CTRL", action = act.Search({ CaseSensitiveString = "" }) },
-	{ key = "H",          mods = "CTRL",       action = act.Search({ CaseInSensitiveString = "" }) },
+	{ key = "H", mods = "SHIFT|CTRL", action = act.Search({ CaseSensitiveString = "" }) },
+	{ key = "H", mods = "CTRL", action = act.Search({ CaseInSensitiveString = "" }) },
 }
 
 return config

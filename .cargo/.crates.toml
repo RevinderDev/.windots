@@ -1,0 +1,28 @@
+[v1]
+"bat 0.24.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bat.exe"]
+"cargo-binutils 0.3.6 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-cov.exe",
+    "cargo-nm.exe",
+    "cargo-objcopy.exe",
+    "cargo-objdump.exe",
+    "cargo-profdata.exe",
+    "cargo-readobj.exe",
+    "cargo-size.exe",
+    "cargo-strip.exe",
+    "rust-ar.exe",
+    "rust-cov.exe",
+    "rust-ld.exe",
+    "rust-lld.exe",
+    "rust-nm.exe",
+    "rust-objcopy.exe",
+    "rust-objdump.exe",
+    "rust-profdata.exe",
+    "rust-readobj.exe",
+    "rust-size.exe",
+    "rust-strip.exe",
+]
+"eza 0.18.8 (registry+https://github.com/rust-lang/crates.io-index)" = ["eza.exe"]
+"git-delta 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["delta.exe"]
+"just 1.25.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
+"ripgrep 14.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["rg.exe"]
+"zoxide 0.9.4 (registry+https://github.com/rust-lang/crates.io-index)" = ["zoxide.exe"]
