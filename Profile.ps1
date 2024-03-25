@@ -14,10 +14,19 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name cat -Value bat
 Set-Alias -Name python2 -Value "$HOME\.pyenv\pyenv-win\versions\2.7\python.exe"
 Set-Alias -Name python3 -Value python
+Set-Alias -Name neovide -Value Neovide-Frameless
 $Env:BAT_THEME = "gruvbox-dark"
 
 # Functions 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function Neovide-Frameless {
+   <#
+    .SYNOPSIS
+        Starts neovide with no frame as its ugly. Alias: neovide
+   #>
+    Start-Process neovide -ArgumentList '--frame none' @args
+}
+
 function Start-AdminSession {
     <#
     .SYNOPSIS
