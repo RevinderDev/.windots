@@ -78,7 +78,7 @@ function Get-ChildItemPretty {
 
 # Prompt
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Invoke-Expression (&starship init powershell)
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/json.omp.json" | Invoke-Expression
 Invoke-Expression (& { ( zoxide init powershell --cmd cd | Out-String ) })
 Import-Module -Name Terminal-Icons
 Set-PSReadLineOption -BellStyle None

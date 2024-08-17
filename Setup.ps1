@@ -31,7 +31,7 @@ $wingetDeps = @(
     "Git.Git"
     "GitHub.Cli"
     "OpenJS.NodeJS"
-    "Starship.Starship"
+    "JanDeDobbeleer.OhMyPosh"
 )
 
 $chocoDeps = @(
@@ -65,23 +65,23 @@ foreach ($wingetDep in $wingetDeps) {
 }
 
 # Path Refresh
-# $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-#
-# $installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
-# foreach ($chocoDep in $chocoDeps) {
-#     if ($installedChocoDeps -notcontains $chocoDep) {
-#         choco install $chocoDep -y
-#     }
-# }
-#
-# [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-# [System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-# [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-# [System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
-#
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+$installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
+foreach ($chocoDep in $chocoDeps) {
+    if ($installedChocoDeps -notcontains $chocoDep) {
+        choco install $chocoDep -y
+    }
+}
+
+[System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+
 # # Install PS Modules
-# foreach ($psModule in $psModules) {
-#     if (!(Get-Module -ListAvailable -Name $psModule)) {
-#         Install-Module -Name $psModule -Force -AcceptLicense -Scope CurrentUser
-#     }
-# }
+foreach ($psModule in $psModules) {
+    if (!(Get-Module -ListAvailable -Name $psModule)) {
+        Install-Module -Name $psModule -Force -AcceptLicense -Scope CurrentUser
+    }
+}
