@@ -144,7 +144,8 @@ config.font_size = 15
 config.window_background_opacity = 0.9
 config.adjust_window_size_when_changing_font_size = false
 config.show_new_tab_button_in_tab_bar = false
-
+config.max_fps = 240
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 -- Shell
 config.default_prog = { "pwsh.exe", "-NoLogo" }
 
@@ -152,12 +153,12 @@ config.default_prog = { "pwsh.exe", "-NoLogo" }
 local act = wezterm.action
 config.keys = {
 	-- Tabs
-	{ key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "q", mods = "CTRL", action = act.CloseCurrentTab({ confirm = true }) },
-	{ key = "e", mods = "CTRL", action = act.ShowTabNavigator },
+	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "q", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+	{ key = "e", mods = "LEADER", action = act.ShowTabNavigator },
 	{
 		key = "r",
-		mods = "CTRL|SHIFT",
+		mods = "LEADER",
 		action = act.PromptInputLine({
 			description = "Enter new name for tab",
 			action = wezterm.action_callback(function(window, pane, line)
@@ -172,9 +173,9 @@ config.keys = {
 	},
 
 	-- Panes
-	{ key = "n", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-	{ key = "p", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-	{ key = "w", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
+	{ key = "n", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	{ key = "p", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+	{ key = "w", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
 	-- Navigating
 	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },

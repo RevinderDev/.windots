@@ -13,20 +13,20 @@ Set-Alias -Name vim -Value nvim
 Set-Alias -Name lg -Value lazygit 
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name cat -Value bat
-Set-Alias -Name python2 -Value "$HOME\.pyenv\pyenv-win\versions\2.7\python.exe"
 Set-Alias -Name python3 -Value python
 $Env:BAT_THEME = "gruvbox-dark"
 $Env:NEOVIDE_FRAME = "none"
 
 # Functions 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function zj { zellij -l compact -c "$HOME\.config\zellij\zellij.kdl" @args }
 
 function Start-AdminSession {
     <#
     .SYNOPSIS
         Starts a new PowerShell session with elevated rights. Alias: su
     #>
-    Start-Process wezterm -Verb runAs -WindowStyle Hidden -ArgumentList "start --cwd $PWD"
+    Start-Process alacritty -Verb runAs -WindowStyle Hidden 
 }
 
 function New-File {
@@ -79,7 +79,6 @@ function Get-ChildItemPretty {
 # Prompt
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/json.omp.json" | Invoke-Expression
-Invoke-Expression (& { ( zoxide init powershell --cmd cd | Out-String ) })
 Import-Module -Name Terminal-Icons
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineOption -PredictionSource History
@@ -88,3 +87,5 @@ Set-PSReadLineOption -PredictionSource History
 Import-Module PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
+(&mise activate pwsh) | Out-String | Invoke-Expression
+Invoke-Expression (& { (zoxide init powershell | Out-String) })

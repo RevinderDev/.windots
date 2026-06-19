@@ -1,17 +1,17 @@
 #Requires -RunAsAdministrator
 
 $symlinks = @{
-	$PROFILE.CurrentUserAllHosts	= ".\Profile.ps1"
-	"$HOME\.cargo\.crates.toml"     = ".\.cargo\.crates.toml"
-	"$HOME\.cargo\.crates2.json"	= ".\.cargo\.crates2.json"
-	"$HOME\AppData\Local\nvim"   	= ".\nvim"
-	"$HOME\.gitconfig"            	= ".\.gitconfig"
-	"$HOME\AppData\Roaming\lazygit" = ".\lazygit"
-	"$HOME\.config\wezterm"         = ".\wezterm"
-	"$HOME\.config\starship.toml"   = ".\starship.toml"
+	$PROFILE.CurrentUserAllHosts	   = ".\Profile.ps1"
+	"$HOME\AppData\Local\nvim"   	   = ".\nvim"
+	"$HOME\.gitconfig"            	   = ".\.gitconfig"
+	"$HOME\AppData\Roaming\lazygit"    = ".\lazygit"
+	"$HOME\.config\wezterm"            = ".\wezterm"
+	"$HOME\.config\starship.toml"	   = ".\starship.toml"
+	"$HOME\.config\mise"               = ".\mise"
+	"$HOME\AppData\Roaming\alacritty\" = ".\alacritty"
+	"$HOME\.config\zellij"		   = ".\zellij"
 }
 
-			
 # Set Working directory
 Set-Location $PSScriptRoot
 [Environment]::CurrentDirectory = $PSScriptRoot
@@ -30,21 +30,14 @@ $wingetDeps = @(
     "Chocolatey.Chocolatey"
     "Git.Git"
     "GitHub.Cli"
-    "OpenJS.NodeJS"
     "JanDeDobbeleer.OhMyPosh"
+    "alacritty"
 )
 
 $chocoDeps = @(
     "fd"
-    "fzf"
-    "lazygit"
-    "neovim"
     "nerd-fonts-jetbrainsmono"
     "nerd-fonts-iosevka"
-    "sed"
-    "wezterm"
-    "zig"
-    "pyenv-win"
 )
 
 $psModules = @(
@@ -73,11 +66,6 @@ foreach ($chocoDep in $chocoDeps) {
         choco install $chocoDep -y
     }
 }
-
-[System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-[System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-[System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-[System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
 
 # # Install PS Modules
 foreach ($psModule in $psModules) {
