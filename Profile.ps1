@@ -15,7 +15,7 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name cat -Value bat
 Set-Alias -Name python3 -Value python
 $Env:BAT_THEME = "gruvbox-dark"
-$Env:NEOVIDE_FRAME = "none"
+# $Env:NEOVIDE_FRAME = "none"
 
 # Functions 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
