@@ -10,6 +10,7 @@ $symlinks = @{
 	"$HOME\.config\mise"               = ".\mise"
 	"$HOME\AppData\Roaming\alacritty\" = ".\alacritty"
 	"$HOME\.config\zellij"		   = ".\zellij"
+	"$HOME\.pi"			   = ".\.pi"
 }
 
 # Set Working directory
