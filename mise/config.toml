@@ -6,11 +6,15 @@
 "cargo:ripgrep" = "15.1"
 "cargo:zoxide" = "0.9"
 fzf = "0.73.1"
+hurl = "8.0.1"
 lazygit = "0.61"
 neovim = "0.12.3"
 node = "26.3.0"
-pi = "0.80.6"
-rust = "1.97.0"
+pi = "0.85.1"
+rust = "1.97"
 zellij = "0.44.3"
 zig = "0.16.0"
-zola = "0.19"
+zola = "0.22.1"
+
+[settings]
+pin = true
