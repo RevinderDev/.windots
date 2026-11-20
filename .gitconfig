@@ -34,3 +34,5 @@
 [push]
     default = current
 
+[http]
+	sslBackend = schannel

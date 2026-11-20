@@ -1,6 +1,6 @@
 [general]
 import = ["./themes/gruvbox_dark.toml"]
-working_directory = "F:\\repos"
+working_directory = "O:\\Developer\\repos"
 
 [terminal.shell]
 program = "pwsh.exe"
@@ -121,3 +121,8 @@ instance = "Alacritty"
 [window.padding]
 x = 6
 y = 6
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"

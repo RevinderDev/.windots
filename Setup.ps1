@@ -1,76 +1,37 @@
 #Requires -RunAsAdministrator
 
 $symlinks = @{
-	$PROFILE.CurrentUserAllHosts	   = ".\Profile.ps1"
-	"$HOME\AppData\Local\nvim"   	   = ".\nvim"
-	"$HOME\.gitconfig"            	   = ".\.gitconfig"
-	"$HOME\AppData\Roaming\lazygit"    = ".\lazygit"
-	"$HOME\.config\wezterm"            = ".\wezterm"
-	"$HOME\.config\starship.toml"	   = ".\starship.toml"
-	"$HOME\.config\mise"               = ".\mise"
-	"$HOME\AppData\Roaming\alacritty\" = ".\alacritty"
-	"$HOME\.config\zellij"		   = ".\zellij"
-	"$HOME\.pi"			   = ".\.pi"
+    $PROFILE.CurrentUserAllHosts       = ".\Profile.ps1"
+    "$HOME\AppData\Local\nvim"         = ".\nvim"
+    "$HOME\.gitconfig"                 = ".\.gitconfig"
+    "$HOME\AppData\Roaming\lazygit"    = ".\lazygit"
+    "$HOME\.config\wezterm"            = ".\wezterm"
+    "$HOME\.config\starship.toml"      = ".\starship.toml"
+    "$HOME\.config\mise"               = ".\mise"
+    "$HOME\AppData\Roaming\alacritty"  = ".\alacritty"
+    "$HOME\.config\zellij"             = ".\zellij"
+    "$HOME\.pi"                        = ".\.pi"
+    "$HOME\.claude"                    = ".\.claude"
 }
 
-# Set Working directory
+# Set working directory
 Set-Location $PSScriptRoot
 [Environment]::CurrentDirectory = $PSScriptRoot
 
+Write-Host "Creating symbolic links..." -ForegroundColor Cyan
 
-Write-Host "Creating symbolic links"
+foreach ($entry in $symlinks.GetEnumerator()) {
+    $linkPath   = $entry.Key
+    $targetPath = Join-Path $PSScriptRoot $entry.Value
 
-foreach ($symlink in $symlinks.GetEnumerator()) {
-	Get-Item -Path $symlink.Key -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-	New-Item -ItemType SymbolicLink -Path $symlink.Key -Target (Resolve-Path $symlink.Value) -Force | Out-Null
-}
+    # Delete existing link or file directly (handles dangling links)
+    Remove-Item -LiteralPath $linkPath -Force -Recurse -ErrorAction SilentlyContinue
 
-
-
-$wingetDeps = @(
-    "Chocolatey.Chocolatey"
-    "Git.Git"
-    "GitHub.Cli"
-    "JanDeDobbeleer.OhMyPosh"
-    "alacritty"
-)
-
-$chocoDeps = @(
-    "fd"
-    "nerd-fonts-jetbrainsmono"
-    "nerd-fonts-iosevka"
-)
-
-$psModules = @(
-    "ps-color-scripts"
-    "PSScriptAnalyzer"
-    "CompletionPredictor"
-    "PSFzf"
-    "PSReadLine"
-)
-
-
-Write-Host "Installing missing dependencies..."
-$installedWingetDeps = winget list | Out-String
-foreach ($wingetDep in $wingetDeps) {
-    if ($installedWingetDeps -notmatch $wingetDep) {
-        winget install -e --id $wingetDep
-    }
-}
-
-# Path Refresh
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-
-$installedChocoDeps = (choco list --limit-output --id-only).Split("`n")
-foreach ($chocoDep in $chocoDeps) {
-    if ($installedChocoDeps -notcontains $chocoDep) {
-        choco install $chocoDep -y
-    }
-}
-
-# # Install PS Modules
-foreach ($psModule in $psModules) {
-    if (!(Get-Module -ListAvailable -Name $psModule)) {
-        Install-Module -Name $psModule -Force -AcceptLicense -Scope CurrentUser
+    # Create new symbolic link
+    if (Test-Path -LiteralPath $targetPath) {
+        New-Item -ItemType SymbolicLink -Path $linkPath -Target $targetPath -Force | Out-Null
+        Write-Host "Successfully linked: $linkPath -> $targetPath" -ForegroundColor Green
+    } else {
+        Write-Warning "Target path does not exist: $targetPath"
     }
 }
